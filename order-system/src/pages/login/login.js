@@ -1,20 +1,8 @@
 import React, { useState, useEffect, useCallback, Fragment } from 'react'
 import styled from 'styled-components'
-import firebase from 'firebase/app'
-import 'firebase/auth'
 import { Button, Grid } from '@material-ui/core'
+import firebase from 'services/firebase'
 import { ReactComponent as MainLogo } from './logo.svg'
-
-const config = {
-  apiKey: 'AIzaSyBcuMSnGu8jG2lKt3TQl49HmLCqqwq_ZjM',
-  authDomain: 'reactzzaria-f6477.firebaseapp.com',
-  databaseURL: 'https://reactzzaria-f6477.firebaseio.com',
-  projectId: 'reactzzaria-f6477',
-  storageBucket: 'reactzzaria-f6477.appspot.com',
-  messagingSenderId: '31143120973'
-}
-
-firebase.initializeApp(config)
 
 function Login () {
   const [userInfo, setUserInfo] = useState({
