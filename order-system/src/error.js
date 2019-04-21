@@ -6,6 +6,11 @@ class ErrorBoundary extends PureComponent {
   static getDerivedStateFromError() {
     return { hasError: true }
   }
+
+  componentDidCatch (error, info) {
+    console.log('Error: ', error)
+    console.log('Info: ', info)
+  }
 	
   render() {
     if (this.state.hasError) {
