@@ -9,7 +9,7 @@ const Login = () => (
       <Grid item>
         <Logo />
       </Grid>
-      <Grid item xs={12}>
+      <Grid item xs={12} container justify='center'>
         <GitHubButton>Log in with GitHub</GitHubButton>
       </Grid>
     </Grid>
@@ -29,8 +29,9 @@ const GitHubButton = styled(Button).attrs({
   fullWidth: true
 })`
   && {
-    font-size: 20px;
+    font-size: 25px;
     padding: 15px;
+    max-width: 480px;
     text-transform: none;
   }
 `
