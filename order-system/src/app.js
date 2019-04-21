@@ -1,4 +1,10 @@
-import React, { lazy, useContext, useEffect, Suspense } from 'react'
+import React, {
+  lazy,
+  useContext,
+  useEffect,
+  useState,
+  Suspense
+} from 'react'
 import PropTypes from 'prop-types'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import { LinearProgress } from '@material-ui/core'
@@ -9,7 +15,8 @@ const MainPage = lazy(() => import('pages/main'))
 const Login = lazy(() => import('pages/login'))
 
 function App ({ location }) {
-  const { userInfo, setUserInfo } = useContext(AuthContext)
+  const { userInfo, setUserInfo, logout } = useContext(AuthContext)
+  const [didCheckUserIn, setDidCheckUserIn] = useState(false)
   const { isUserLoggedIn } = userInfo
 
   useEffect(() => {
@@ -20,8 +27,15 @@ function App ({ location }) {
         userInfo,
         setUserInfo
       })
+      setDidCheckUserIn(true)
     })
   }, [])
+
+  window.logout = logout
+
+  if (!didCheckUserIn) {
+    return <LinearProgress />
+  }
 
   if (isUserLoggedIn) {
     if (location.pathname === '/login') {
