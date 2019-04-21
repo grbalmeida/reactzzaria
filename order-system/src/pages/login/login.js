@@ -1,16 +1,16 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Button, Grid } from '@material-ui/core'
-import { ReactComponent as Logo } from './logo.svg'
+import { ReactComponent as MainLogo } from './logo.svg'
 
 const Login = () => (
   <Container>
-    <Grid container direction='column' alignItems='center' spacing={40}>
+    <Grid container justify='center' spacing={40}>
       <Grid item>
         <Logo />
       </Grid>
-      <Grid item>
-        <Button>Log in with GitHub</Button>
+      <Grid item xs={12}>
+        <GitHubButton variant='contained' fullWidth>Log in with GitHub</GitHubButton>
       </Grid>
     </Grid>
   </Container>
@@ -18,6 +18,18 @@ const Login = () => (
 
 const Container = styled.div`
   padding: 20px;
+`
+
+const Logo = styled(MainLogo)`
+  width: 100%;
+`
+
+const GitHubButton = styled(Button)`
+  && {
+    font-size: 20px;
+    padding: 15px;
+    text-transform: none;
+  }
 `
 
 export default Login
