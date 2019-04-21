@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { PureComponent, Fragment } from 'react'
 import styled from 'styled-components'
 import firebase from 'firebase/app'
 import 'firebase/auth'
@@ -16,23 +16,39 @@ const config = {
 
 firebase.initializeApp(config)
 
-const handleAuthentication = () => {
-  const provider = new firebase.auth.GithubAuthProvider()
-  firebase.auth().signInWithRedirect(provider)
-}
-
 class Login extends PureComponent {
+  state = {
+    isUserLoggedIn: false,
+    user: null
+  }
+
   componentDidMount () {
     firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        console.log('User logged in: ', user)
-      } else {
-        console.log('User is offline: ', user)
-      }
+      this.setState({
+        isUserLoggedIn: !!user,
+        user
+      })
+    })
+  }
+
+  login () {
+    const provider = new firebase.auth.GithubAuthProvider()
+    firebase.auth().signInWithRedirect(provider)
+  }
+
+  logout = () => {
+    firebase.auth().signOut().then(() => {
+      console.log('Logged out!')
+      this.setState({
+        isUserLoggedIn: false,
+        user: null
+      })
     })
   }
 
   render () {
+    const { isUserLoggedIn, user } = this.state
+
     return (
       <Container>
         <Grid container justify='center' spacing={40}>
@@ -40,7 +56,15 @@ class Login extends PureComponent {
             <Logo />
           </Grid>
           <Grid item xs={12} container justify='center'>
-            <GitHubButton onClick={handleAuthentication}>Log in with GitHub</GitHubButton>
+            {isUserLoggedIn && (
+              <Fragment>
+                <pre>{JSON.stringify(user.displayName, null, 2)}</pre>
+                <Button variant='contained' onClick={this.logout}>Sair</Button>
+              </Fragment>
+            )}
+            {!isUserLoggedIn && (
+              <GitHubButton onClick={this.login}>Log in with GitHub</GitHubButton>
+            )}
           </Grid>
         </Grid>
       </Container>
