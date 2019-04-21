@@ -1,13 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import App from './app'
+import Root from './root'
 import * as serviceWorker from './serviceWorker'
 
 import ErrorBoundary from './error'
 
 ReactDOM.render(
   <ErrorBoundary>
-    <App />
+    <Root />
   </ErrorBoundary>,
   document.getElementById('root')
 )
