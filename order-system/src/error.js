@@ -1,9 +1,14 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 
 class ErrorBoundary extends PureComponent {
   state = { hasError: false }
 
-  static getDerivedStateFromError() {
+  static propTypes = {
+    children: PropTypes.func.isRequired
+  }
+
+  static getDerivedStateFromError () {
     return { hasError: true }
   }
 
@@ -11,8 +16,8 @@ class ErrorBoundary extends PureComponent {
     console.log('Error: ', error)
     console.log('Info: ', info)
   }
-	
-  render() {
+
+  render () {
     if (this.state.hasError) {
       return <h1>An error has occurred!</h1>
     }
