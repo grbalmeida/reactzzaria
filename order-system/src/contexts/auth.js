@@ -33,7 +33,8 @@ function Auth ({ children }) {
     <AuthContext.Provider value={{
       login,
       userInfo,
-      logout
+      logout,
+      setUserInfo
     }}>
       {children}
     </AuthContext.Provider>
