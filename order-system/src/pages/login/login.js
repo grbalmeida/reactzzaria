@@ -1,19 +1,23 @@
-import React, { useState, useEffect, useCallback, Fragment } from 'react'
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+  useContext,
+  Fragment
+} from 'react'
 import styled from 'styled-components'
 import { Button, Grid } from '@material-ui/core'
 import firebase from 'services/firebase'
+import { AuthContext } from 'contexts/auth'
 import { ReactComponent as MainLogo } from './logo.svg'
 
 function Login () {
+  const { login } = useContext(AuthContext)
+
   const [userInfo, setUserInfo] = useState({
     isUserLoggedIn: false,
     user: null
   })
-
-  const login = useCallback(() => {
-    const provider = new firebase.auth.GithubAuthProvider()
-    firebase.auth().signInWithRedirect(provider)
-  }, [])
 
   const logout = useCallback(() => {
     firebase.auth().signOut().then(() => {
