@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import firebase from 'firebase/app'
+import 'firebase/auth'
 import { Button, Grid } from '@material-ui/core'
 import { ReactComponent as MainLogo } from './logo.svg'
 
@@ -15,6 +16,11 @@ const config = {
 
 firebase.initializeApp(config)
 
+const handleAuthentication = () => {
+  const provider = new firebase.auth.GithubAuthProvider()
+  firebase.auth().signInWithRedirect(provider)
+}
+
 const Login = () => (
   <Container>
     <Grid container justify='center' spacing={40}>
@@ -22,7 +28,7 @@ const Login = () => (
         <Logo />
       </Grid>
       <Grid item xs={12} container justify='center'>
-        <GitHubButton>Log in with GitHub</GitHubButton>
+        <GitHubButton onClick={handleAuthentication}>Log in with GitHub</GitHubButton>
       </Grid>
     </Grid>
   </Container>
