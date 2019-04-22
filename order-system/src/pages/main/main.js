@@ -10,7 +10,7 @@ import {
 import { AccountCircle } from '@material-ui/icons'
 import styled from 'styled-components'
 import { AuthContext } from 'contexts/auth'
-import { ReactComponent as MainLogo } from 'pages/login/logo.svg'
+import { ReactComponent as MainLogo } from 'images/logo.svg'
 
 const Main = () => {
   const [anchorElement, setAnchorElement] = useState(null)
