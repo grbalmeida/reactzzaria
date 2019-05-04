@@ -8,6 +8,7 @@ import {
   Typography,
   Menu,
   MenuItem,
+  Paper,
   withStyles
 } from '@material-ui/core'
 import { AccountCircle } from '@material-ui/icons'
@@ -50,17 +51,55 @@ const Main = () => {
       </AppBar>
       <Spacer />
       <Content>
-        <Grid container justify='center'>
-          <Grid item>
-            <Typography variant='h3'>
-              O que vai ser hoje, {userName}? =)
-            </Typography>
+        <Grid container direction='column' alignItems='center'>
+          <Typography variant='h3'>
+            What do you want to eat today, {userName}? =)
+          </Typography>
+          <Typography variant='h4'>
+            Choose the size of the pizza:
+          </Typography>
+          <Grid container spacing={16}>
+            {pizzaSizes.map((pizza) => (
+              <Grid item key={pizza.id} xs={4}>
+                <Paper style={{ padding: 20 }}>
+                  <div>{pizza.size}cm</div>
+                  <Typography>{pizza.name}</Typography>
+                  <Typography>
+                    {pizza.slices} slices, {pizza.flavours} flavours
+                  </Typography>
+                </Paper>
+              </Grid>
+            ))}
           </Grid>
         </Grid>
       </Content>
     </>
   )
 }
+
+const pizzaSizes = [
+  {
+    id: 0,
+    name: 'Small',
+    size: 28,
+    slices: 2,
+    flavours: 1
+  },
+  {
+    id: 1,
+    name: 'Average',
+    size: 30,
+    slices: 6,
+    flavours: 2
+  },
+  {
+    id: 2,
+    name: 'Big',
+    size: 32,
+    slices: 8,
+    flavours: 3
+  }
+]
 
 const Toolbar = styled(MaterialToolbar)`
   margin: 0 auto;
