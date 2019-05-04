@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react'
+import PropTypes from 'prop-types'
 import {
   AppBar,
   Grid,
@@ -6,7 +7,8 @@ import {
   IconButton,
   Typography,
   Menu,
-  MenuItem
+  MenuItem,
+  withStyles
 } from '@material-ui/core'
 import { AccountCircle } from '@material-ui/icons'
 import styled from 'styled-components'
@@ -46,6 +48,7 @@ const Main = () => {
           </Menu>
         </Toolbar>
       </AppBar>
+      <Spacer />
       <Content>
         <Grid container justify='center'>
           <Grid item>
@@ -83,7 +86,20 @@ const Logo = styled(MainLogo)`
 `
 
 const Content = styled.main`
-  padding: 80px 20px 20px;
+  padding: 20px;
 `
+const style = (theme) => ({
+  main: theme.mixins.toolbar
+})
+
+const SpacerWrapper = ({ classes }) => (
+  <div className={classes.main} />
+)
+
+SpacerWrapper.propTypes = {
+  classes: PropTypes.object
+}
+
+const Spacer = withStyles(style)(SpacerWrapper)
 
 export default Main
