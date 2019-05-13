@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react'
 import PropTypes from 'prop-types'
 import {
   AppBar,
+  Divider as MaterialDivider,
   Grid,
   Toolbar as MaterialToolbar,
   IconButton,
@@ -52,22 +53,23 @@ const Main = () => {
       <Spacer />
       <Content>
         <Grid container direction='column' alignItems='center'>
-          <Typography variant='h3'>
+          <Typography variant='h3' gutterBottom>
             What do you want to eat today, {userName}? =)
           </Typography>
-          <Typography variant='h4'>
+          <Typography variant='h4' gutterBottom>
             Choose the size of the pizza:
           </Typography>
           <Grid container spacing={16}>
             {pizzaSizes.map((pizza) => (
               <Grid item key={pizza.id} xs={4}>
-                <Paper style={{ padding: 20 }}>
+                <PaperPizza>
                   <div>{pizza.size}cm</div>
-                  <Typography>{pizza.name}</Typography>
+                  <Divider />
+                  <Typography variant='h5'>{pizza.name}</Typography>
                   <Typography>
                     {pizza.slices} slices, {pizza.flavours} flavours
                   </Typography>
-                </Paper>
+                </PaperPizza>
               </Grid>
             ))}
           </Grid>
@@ -100,6 +102,18 @@ const pizzaSizes = [
     flavours: 3
   }
 ]
+
+const Divider = styled(MaterialDivider)`
+  width: 100%;
+  margin: 20px 0;
+`
+
+const PaperPizza = styled(Paper)`
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+`
 
 const Toolbar = styled(MaterialToolbar)`
   margin: 0 auto;
