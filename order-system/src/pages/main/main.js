@@ -69,7 +69,9 @@ const Main = () => {
                   <Divider />
                   <Typography variant='h5'>{pizza.name}</Typography>
                   <Typography>
-                    {pizza.slices} slices, {pizza.flavours} flavours
+                    {pizza.slices} slices, {' '}
+                    {pizza.flavours} {' '}
+                    {singularOrPlural(pizza.flavours, 'flavour', 'flavours')}
                   </Typography>
                 </PaperPizza>
               </Grid>
@@ -79,6 +81,10 @@ const Main = () => {
       </Content>
     </>
   )
+}
+
+function singularOrPlural (amount, singular, plural) {
+  return amount === 1 ? singular : plural
 }
 
 const pizzaSizes = [
@@ -113,7 +119,7 @@ const Divider = styled(MaterialDivider)`
 const Title = styled(Typography).attrs({
   gutterBottom: true,
   align: 'center'
-})
+})``
 
 const PizzasGrid = styled(Grid).attrs({
   container: true,
