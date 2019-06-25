@@ -14,7 +14,6 @@ import Header from './header'
 
 const Main = () => {
   const { userInfo } = useContext(AuthContext)
-  const userName = userInfo.user.displayName.split(' ')[0]
 
   return (
     <>
@@ -23,7 +22,7 @@ const Main = () => {
       <Content>
         <Grid container direction='column' alignItems='center'>
           <Title variant='h3'>
-            What do you want to eat today, {userName}? =)
+            What do you want to eat today, {userInfo.user.firstName}? =)
           </Title>
           <Title variant='h4'>
             Choose the size of the pizza:

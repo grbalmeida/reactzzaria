@@ -23,9 +23,10 @@ function App ({ location }) {
     firebase.auth().onAuthStateChanged((user) => {
       setUserInfo({
         isUserLoggedIn: !!user,
-        user,
-        userInfo,
-        setUserInfo
+        user: !!user && {
+          ...user,
+          firstName: user.displayName.split(' ')[0]
+        }
       })
       setDidCheckUserIn(true)
     })

@@ -16,7 +16,6 @@ import { ReactComponent as MainLogo } from 'images/logo.svg'
 const Header = () => {
   const [anchorElement, setAnchorElement] = useState(null)
   const { userInfo, logout } = useContext(AuthContext)
-  const userName = userInfo.user.displayName.split(' ')[0]
 
   const handleOpenMenu = (e) => {
     setAnchorElement(e.target)
@@ -32,7 +31,7 @@ const Header = () => {
         <LogoContainer>
           <Logo />
         </LogoContainer>
-        <Typography color='inherit'>Hello {userName} =)</Typography>
+        <Typography color='inherit'>Hello {userInfo.user.firstName} =)</Typography>
         <IconButton color='inherit' onClick={handleOpenMenu}>
           <AccountCircle />
         </IconButton>
