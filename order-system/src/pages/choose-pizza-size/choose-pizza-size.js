@@ -56,13 +56,13 @@ const Title = styled(Typography).attrs({
 })``
 
 const Divider = styled(MaterialDivider)`
-  width: 100%;
   margin: 20px 0;
+  width: 100%;
 `
 
 const PizzasGrid = styled(Grid).attrs({
   container: true,
-  spacing: 16
+  spacing: 2
 })`
   padding: 20px;
 `
