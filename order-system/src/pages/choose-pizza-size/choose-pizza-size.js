@@ -30,7 +30,10 @@ const ChoosePizzaSize = () => {
         {pizzaSizes.map((pizza) => (
           <Grid item key={pizza.id}>
             <Card>
-              <CardActionArea to='/choose-pizza-flavours'>
+              <CardActionArea to={{
+                pathname: '/choose-pizza-flavours',
+                state: pizza
+              }}>
                 <Pizza>
                   <PizzaText>{pizza.size}cm</PizzaText>
                 </Pizza>
