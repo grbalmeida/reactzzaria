@@ -1,8 +1,10 @@
 import React, { useContext } from 'react'
+import { Link } from 'react-router-dom'
 import {
+  Card,
+  CardActionArea as MaterialCardActionArea,
   Divider as MaterialDivider,
   Grid,
-  Paper,
   Typography
 } from '@material-ui/core'
 import styled from 'styled-components'
@@ -27,18 +29,20 @@ const ChoosePizzaSize = () => {
       <PizzasGrid>
         {pizzaSizes.map((pizza) => (
           <Grid item key={pizza.id}>
-            <PaperPizza>
-              <Pizza>
-                <PizzaText>{pizza.size}cm</PizzaText>
-              </Pizza>
-              <Divider />
-              <Typography variant='h5'>{pizza.name}</Typography>
-              <Typography>
-                {pizza.slices} slices, {' '}
-                {pizza.flavours} {' '}
-                {singularOrPlural(pizza.flavours, 'flavour', 'flavours')}
-              </Typography>
-            </PaperPizza>
+            <Card>
+              <CardActionArea to='/choose-pizza-flavours'>
+                <Pizza>
+                  <PizzaText>{pizza.size}cm</PizzaText>
+                </Pizza>
+                <Divider />
+                <Typography variant='h5'>{pizza.name}</Typography>
+                <Typography>
+                  {pizza.slices} slices, {' '}
+                  {pizza.flavours} {' '}
+                  {singularOrPlural(pizza.flavours, 'flavour', 'flavours')}
+                </Typography>
+              </CardActionArea>
+            </Card>
           </Grid>
         ))}
       </PizzasGrid>
@@ -67,7 +71,9 @@ const PizzasGrid = styled(Grid).attrs({
   padding: 20px;
 `
 
-const PaperPizza = styled(Paper)`
+const CardActionArea = styled(MaterialCardActionArea).attrs({
+  component: Link
+})`
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -77,6 +83,7 @@ const PaperPizza = styled(Paper)`
 
 const Pizza = styled.div`
   align-items: center;
+  background: #fff;
   border: 1px solid #ccc;
   border-radius: 50%;
   display: flex;
@@ -84,6 +91,7 @@ const Pizza = styled.div`
   justify-content: center;
   position: relative;
   width: 200px;
+  z-index: 1;
 
   &::before,
   &::after {
