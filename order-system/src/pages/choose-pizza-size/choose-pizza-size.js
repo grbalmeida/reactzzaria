@@ -11,6 +11,7 @@ import styled from 'styled-components'
 
 import { AuthContext } from 'contexts/auth'
 import pizzaSizes from 'fake-data/pizza-sizes'
+import { CHOOSE_PIZZA_FLAVOURS } from 'routes'
 
 const ChoosePizzaSize = () => {
   const { userInfo } = useContext(AuthContext)
@@ -31,7 +32,7 @@ const ChoosePizzaSize = () => {
           <Grid item key={pizza.id}>
             <Card>
               <CardActionArea to={{
-                pathname: '/choose-pizza-flavours',
+                pathname: CHOOSE_PIZZA_FLAVOURS,
                 state: pizza
               }}>
                 <Pizza>
