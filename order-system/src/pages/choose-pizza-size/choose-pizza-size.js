@@ -9,23 +9,25 @@ import {
 } from '@material-ui/core'
 import styled from 'styled-components'
 
+import { singularOrPlural } from 'utils'
+import { H3, H4, HeaderContent } from 'ui'
 import { AuthContext } from 'contexts/auth'
-import pizzaSizes from 'fake-data/pizza-sizes'
 import { CHOOSE_PIZZA_FLAVOURS } from 'routes'
+import pizzaSizes from 'fake-data/pizza-sizes'
 
 const ChoosePizzaSize = () => {
   const { userInfo } = useContext(AuthContext)
 
   return (
     <>
-      <Grid container direction='column' alignItems='center'>
-        <Title variant='h3'>
+      <HeaderContent>
+        <H3>
           What do you want to eat today, {userInfo.user.firstName}? =)
-        </Title>
-        <Title variant='h4'>
+        </H3>
+        <H4>
           Choose the size of the pizza:
-        </Title>
-      </Grid>
+        </H4>
+      </HeaderContent>
 
       <PizzasGrid>
         {pizzaSizes.map((pizza) => (
@@ -53,15 +55,6 @@ const ChoosePizzaSize = () => {
     </>
   )
 }
-
-function singularOrPlural (amount, singular, plural) {
-  return amount === 1 ? singular : plural
-}
-
-const Title = styled(Typography).attrs({
-  gutterBottom: true,
-  align: 'center'
-})``
 
 const Divider = styled(MaterialDivider)`
   margin: 20px 0;
