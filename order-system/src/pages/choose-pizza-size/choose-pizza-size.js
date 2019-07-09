@@ -3,14 +3,19 @@ import { Link } from 'react-router-dom'
 import {
   Card,
   CardActionArea as MaterialCardActionArea,
-  Divider as MaterialDivider,
   Grid,
   Typography
 } from '@material-ui/core'
 import styled from 'styled-components'
 
 import { singularOrPlural } from 'utils'
-import { H3, H4, HeaderContent } from 'ui'
+import {
+  H3,
+  H4,
+  HeaderContent,
+  PizzasGrid,
+  Divider
+} from 'ui'
 import { AuthContext } from 'contexts/auth'
 import { CHOOSE_PIZZA_FLAVOURS } from 'routes'
 import pizzaSizes from 'fake-data/pizza-sizes'
@@ -55,18 +60,6 @@ const ChoosePizzaSize = () => {
     </>
   )
 }
-
-const Divider = styled(MaterialDivider)`
-  margin: 20px 0;
-  width: 100%;
-`
-
-const PizzasGrid = styled(Grid).attrs({
-  container: true,
-  spacing: 2
-})`
-  padding: 20px;
-`
 
 const CardActionArea = styled(MaterialCardActionArea).attrs({
   component: Link
