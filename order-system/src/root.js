@@ -1,5 +1,6 @@
 import React from 'react'
 import { hot } from 'react-hot-loader'
+import { ThemeProvider } from 'styled-components'
 import { BrowserRouter, Route } from 'react-router-dom'
 import {
   CssBaseline,
@@ -18,12 +19,14 @@ const theme = createMuiTheme({
 function Root () {
   return (
     <MuiThemeProvider theme={theme}>
-      <AuthProvider>
-        <CssBaseline />
-        <BrowserRouter>
-          <Route component={App} />
-        </BrowserRouter>
-      </AuthProvider>
+      <ThemeProvider theme={theme}>
+        <AuthProvider>
+          <CssBaseline />
+          <BrowserRouter>
+            <Route component={App} />
+          </BrowserRouter>
+        </AuthProvider>
+      </ThemeProvider>
     </MuiThemeProvider>
   )
 }
