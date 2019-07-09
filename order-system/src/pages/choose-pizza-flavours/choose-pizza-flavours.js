@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Redirect } from 'react-router-dom'
 import PropTypes from 'prop-types'
@@ -20,11 +20,22 @@ import { singularOrPlural } from 'utils'
 import pizzaFlavours from 'fake-data/pizza-flavours'
 
 const ChoosePizzaFlavours = ({ location }) => {
+  const [checkboxes, setCheckboxes] = useState(() => ({}))
+
   if (!location.state) {
     return <Redirect to={HOME} />
   }
 
   const { flavours, id } = location.state
+
+  const handleChangeCheckBox = pizzaId => e => {
+    setCheckboxes(checkboxes => {
+      return {
+        ...checkboxes,
+        [pizzaId]: !checkboxes[pizzaId]
+      }
+    })
+  }
 
   return (
     <>
@@ -39,7 +50,11 @@ const ChoosePizzaFlavours = ({ location }) => {
           <Grid item key={pizza.id} xs>
             <Card>
               <Label>
-                <input type='checkbox' />
+                <input
+                  type='checkbox'
+                  checked={!!checkboxes[pizza.id]}
+                  onChange={handleChangeCheckBox(pizza.id)}
+                />
                 <Img src={pizza.image} />
                 <Divider />
                 <Typography>{pizza.name}</Typography>
