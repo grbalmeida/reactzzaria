@@ -9,7 +9,13 @@ import {
 } from '@material-ui/core'
 
 import { HOME } from 'routes'
-import { H4, HeaderContent, PizzasGrid, Divider } from 'ui'
+import {
+  CardLink,
+  Divider,
+  H4,
+  HeaderContent,
+  PizzasGrid
+} from 'ui'
 import { singularOrPlural } from 'utils'
 import pizzaFlavours from 'fake-data/pizza-flavours'
 
@@ -18,7 +24,8 @@ const ChoosePizzaFlavours = ({ location }) => {
     return <Redirect to={HOME} />
   }
 
-  const { flavours } = location.state
+  const { flavours, id } = location.state
+
   return (
     <>
       <HeaderContent>
@@ -31,10 +38,13 @@ const ChoosePizzaFlavours = ({ location }) => {
         {pizzaFlavours.map(pizza => (
           <Grid item key={pizza.id} xs>
             <Card>
-              <Img src={pizza.image} />
-              <Divider />
-              <Typography>{pizza.name}</Typography>
-              <Typography variant='h5'>{pizza.value[0]}</Typography>
+              <Label>
+                <input type='checkbox' />
+                <Img src={pizza.image} />
+                <Divider />
+                <Typography>{pizza.name}</Typography>
+                <Typography variant='h5'>{pizza.value[id]}</Typography>
+              </Label>
             </Card>
           </Grid>
         ))}
@@ -46,6 +56,10 @@ const ChoosePizzaFlavours = ({ location }) => {
 ChoosePizzaFlavours.propTypes = {
   location: PropTypes.object.isRequired
 }
+
+const Label = styled(CardLink).attrs({
+  component: 'label'
+})``
 
 const Img = styled.img`
   width: 200px;
