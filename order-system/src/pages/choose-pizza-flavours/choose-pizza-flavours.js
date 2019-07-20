@@ -16,7 +16,7 @@ import {
   HeaderContent,
   PizzasGrid
 } from 'ui'
-import { singularOrPlural } from 'utils'
+import { singularOrPlural, toMoney } from 'utils'
 import pizzaFlavours from 'fake-data/pizza-flavours'
 
 const ChoosePizzaFlavours = ({ location }) => {
@@ -61,7 +61,7 @@ const ChoosePizzaFlavours = ({ location }) => {
                 <Img src={pizza.image} />
                 <Divider />
                 <Typography>{pizza.name}</Typography>
-                <Typography variant='h5'>{pizza.value[id]}</Typography>
+                <Typography variant='h5'>{toMoney(pizza.value[id])}</Typography>
               </Label>
             </Card>
           </Grid>
