@@ -87,8 +87,10 @@ function checkboxesChecked (checkboxes) {
 }
 
 const Card = styled(MaterialCard)`
-  border: 2px solid transparent;
-  border-color: ${({ theme, checked }) => checked ? theme.palette.secondary.light : ''};
+  && {
+    border: 2px solid transparent;
+    border-color: ${({ theme, checked }) => checked ? theme.palette.secondary.light : ''};
+  }
 `
 
 const Label = styled(CardLink).attrs({

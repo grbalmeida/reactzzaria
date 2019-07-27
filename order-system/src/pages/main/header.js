@@ -48,9 +48,11 @@ const Header = () => {
 }
 
 const Toolbar = styled(MaterialToolbar)`
-  margin: 0 auto;
-  max-width: ${({ theme }) => theme.breakpoints.values.lg};
-  width: 100%;
+  && {
+    margin: 0 auto;
+    max-width: ${({ theme }) => theme.breakpoints.values.lg};
+    width: 100%;
+  }
 `
 
 const LogoContainer = styled.div`
