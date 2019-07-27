@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 import {
   withStyles
 } from '@material-ui/core'
-import styled from 'styled-components'
 
 import Header from './header'
 import { HOME, CHOOSE_PIZZA_FLAVOURS } from 'routes'
@@ -16,26 +15,21 @@ const Main = () => (
   <>
     <Header />
     <Spacer />
-    <Content>
-      <Suspense fallback='Loading...'>
-        <Switch>
-          <Route
-            path={HOME}
-            exact component={ChoosePizzaSize}
-          />
-          <Route
-            path={CHOOSE_PIZZA_FLAVOURS}
-            component={ChoosePizzaFlavours}
-          />
-        </Switch>
-      </Suspense>
-    </Content>
+    <Suspense fallback='Loading...'>
+      <Switch>
+        <Route
+          path={HOME}
+          exact component={ChoosePizzaSize}
+        />
+        <Route
+          path={CHOOSE_PIZZA_FLAVOURS}
+          component={ChoosePizzaFlavours}
+        />
+      </Switch>
+    </Suspense>
   </>
 )
 
-const Content = styled.main`
-  padding: ${({ theme }) => theme.spacing(3)}px;
-`
 const style = (theme) => ({
   main: theme.mixins.toolbar
 })

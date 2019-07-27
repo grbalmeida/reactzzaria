@@ -9,6 +9,7 @@ import styled from 'styled-components'
 import { singularOrPlural } from 'utils'
 import {
   CardLink,
+  Content,
   Divider,
   H3,
   H4,
@@ -23,7 +24,7 @@ const ChoosePizzaSize = () => {
   const { userInfo } = useContext(AuthContext)
 
   return (
-    <>
+    <Content>
       <HeaderContent>
         <H3>
           What do you want to eat today, {userInfo.user.firstName}? =)
@@ -56,7 +57,7 @@ const ChoosePizzaSize = () => {
           </Grid>
         ))}
       </PizzasGrid>
-    </>
+    </Content>
   )
 }
 
