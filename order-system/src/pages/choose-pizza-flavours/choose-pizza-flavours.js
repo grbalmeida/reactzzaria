@@ -72,7 +72,16 @@ const ChoosePizzaFlavours = ({ location }) => {
         </PizzasGrid>
       </Content>
       <Footer>
-        <Container />
+        <Container>
+          <Grid container>
+            <OrderContainer>
+              Order
+            </OrderContainer>
+            <Grid item>
+              Action buttons
+            </Grid>
+          </Grid>
+        </Container>
       </Footer>
     </>
   )
@@ -111,6 +120,14 @@ const Footer = styled.footer`
   box-shadow: 0 0 3px ${({ theme }) => theme.palette.grey['400']}
   padding: ${({ theme }) => theme.spacing(3)}px
   width: 100%
+`
+
+const OrderContainer = styled(Grid).attrs({
+  item: true
+})`
+  && {
+    flex-grow: 1;
+  }
 `
 
 export default ChoosePizzaFlavours
