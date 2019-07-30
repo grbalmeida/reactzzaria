@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import {
   Card,
   Grid,
@@ -16,12 +16,12 @@ import {
   HeaderContent,
   PizzasGrid
 } from 'ui'
-import { AuthContext } from 'contexts/auth'
+import { useAuth } from 'hooks'
 import { CHOOSE_PIZZA_FLAVOURS } from 'routes'
 import pizzaSizes from 'fake-data/pizza-sizes'
 
 const ChoosePizzaSize = () => {
-  const { userInfo } = useContext(AuthContext)
+  const { userInfo } = useAuth()
 
   return (
     <Content>

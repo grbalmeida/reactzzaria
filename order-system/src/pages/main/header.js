@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import {
   AppBar,
   IconButton,
@@ -10,12 +10,12 @@ import {
 import { AccountCircle } from '@material-ui/icons'
 import styled from 'styled-components'
 
-import { AuthContext } from 'contexts/auth'
+import { useAuth } from 'hooks'
 import { ReactComponent as MainLogo } from 'images/logo.svg'
 
 const Header = () => {
   const [anchorElement, setAnchorElement] = useState(null)
-  const { userInfo, logout } = useContext(AuthContext)
+  const { userInfo, logout } = useAuth()
 
   const handleOpenMenu = (e) => {
     setAnchorElement(e.target)
