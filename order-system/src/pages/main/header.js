@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import {
   AppBar,
   IconButton,
@@ -11,6 +12,7 @@ import { AccountCircle } from '@material-ui/icons'
 import styled from 'styled-components'
 
 import { useAuth } from 'hooks'
+import { HOME } from 'routes'
 import { ReactComponent as MainLogo } from 'images/logo.svg'
 
 const Header = () => {
@@ -29,7 +31,9 @@ const Header = () => {
     <AppBar>
       <Toolbar>
         <LogoContainer>
-          <Logo />
+          <LinkLogo to={HOME}>
+            <Logo />
+          </LinkLogo>
         </LogoContainer>
         <Typography color='inherit'>Hello {userInfo.user.firstName} =)</Typography>
         <IconButton color='inherit' onClick={handleOpenMenu}>
@@ -57,6 +61,10 @@ const Toolbar = styled(MaterialToolbar)`
 
 const LogoContainer = styled.div`
   flex-grow: 1;
+`
+
+const LinkLogo = styled(Link)`
+  display: inline-block;
 `
 
 const Logo = styled(MainLogo)`
