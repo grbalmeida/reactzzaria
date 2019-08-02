@@ -18,7 +18,7 @@ import {
   Footer
 } from 'ui'
 import { singularOrPlural, toMoney } from 'utils'
-import { HOME } from 'routes'
+import { HOME, CHOOSE_PIZZA_QUANTITY } from 'routes'
 import pizzaFlavours from 'fake-data/pizza-flavours'
 
 const ChoosePizzaFlavours = ({ location }) => {
@@ -71,7 +71,20 @@ const ChoosePizzaFlavours = ({ location }) => {
           ))}
         </PizzasGrid>
       </Content>
-      <Footer />
+      <Footer
+        buttons={[
+          {
+            to: HOME,
+            children: 'Change size'
+          },
+
+          {
+            to: CHOOSE_PIZZA_QUANTITY,
+            children: 'How many pizzas?',
+            color: 'primary'
+          }
+        ]}
+      />
     </>
   )
 }

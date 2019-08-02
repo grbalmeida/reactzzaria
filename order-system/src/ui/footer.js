@@ -11,9 +11,8 @@ import {
 
 import { useAuth } from 'hooks'
 import { singularOrPlural } from 'utils'
-import { HOME, CHOOSE_PIZZA_QUANTITY } from 'routes'
 
-function Footer ({ location }) {
+function Footer ({ buttons, location }) {
   const { userInfo } = useAuth()
   const { name, slices, flavours } = location.state
 
@@ -32,8 +31,12 @@ function Footer ({ location }) {
             </Typography>
           </OrderContainer>
           <Grid item>
-            <Button to={HOME}>Change size</Button>
-            <Button to={CHOOSE_PIZZA_QUANTITY} color='primary'>How many pizzas?</Button>
+            {buttons.map(button => (
+              <Button
+                key={button.to}
+                {...button}
+              />
+            ))}
           </Grid>
         </Grid>
       </Container>
@@ -42,6 +45,7 @@ function Footer ({ location }) {
 }
 
 Footer.propTypes = {
+  buttons: PropTypes.array.isRequired,
   location: PropTypes.object.isRequired
 }
 
