@@ -1,10 +1,8 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { Redirect, Link } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {
-  Button as MaterialButton,
-  Container,
   Grid,
   Card as MaterialCard,
   Typography
@@ -16,22 +14,21 @@ import {
   Divider,
   H4,
   HeaderContent,
-  PizzasGrid
+  PizzasGrid,
+  Footer
 } from 'ui'
 import { singularOrPlural, toMoney } from 'utils'
-import { HOME, CHOOSE_PIZZA_QUANTITY } from 'routes'
-import { useAuth } from 'hooks'
+import { HOME } from 'routes'
 import pizzaFlavours from 'fake-data/pizza-flavours'
 
 const ChoosePizzaFlavours = ({ location }) => {
   const [checkboxes, setCheckboxes] = useState(() => ({}))
-  const { userInfo } = useAuth()
 
   if (!location.state) {
     return <Redirect to={HOME} />
   }
 
-  const { flavours, id, name, slices } = location.state
+  const { flavours, id } = location.state
 
   const handleChangeCheckBox = pizzaId => e => {
     if (checkboxesChecked(checkboxes).length === flavours && e.target.checked === true) {
@@ -74,26 +71,7 @@ const ChoosePizzaFlavours = ({ location }) => {
           ))}
         </PizzasGrid>
       </Content>
-      <Footer>
-        <Container>
-          <Grid container>
-            <OrderContainer>
-              <Typography>
-                <b>{userInfo.user.firstName}, your order is:</b>
-              </Typography>
-              <Typography>
-                <b>{name.toUpperCase()}</b> pizza {'- '}
-                ({slices} {singularOrPlural(slices, 'slice', 'slices')}, {' '}
-                {flavours} {singularOrPlural(flavours, 'flavour', 'flavours')})
-              </Typography>
-            </OrderContainer>
-            <Grid item>
-              <Button to={HOME}>Change size</Button>
-              <Button to={CHOOSE_PIZZA_QUANTITY} color='primary'>How many pizzas?</Button>
-            </Grid>
-          </Grid>
-        </Container>
-      </Footer>
+      <Footer />
     </>
   )
 }
@@ -125,29 +103,6 @@ const Checkbox = styled.input.attrs({
 
 const Img = styled.img`
   width: 200px;
-`
-
-const Footer = styled.footer`
-  box-shadow: 0 0 3px ${({ theme }) => theme.palette.grey['400']}
-  padding: ${({ theme }) => theme.spacing(3)}px
-  width: 100%
-`
-
-const OrderContainer = styled(Grid).attrs({
-  item: true
-})`
-  && {
-    flex-grow: 1;
-  }
-`
-
-const Button = styled(MaterialButton).attrs({
-  variant: 'contained',
-  component: Link
-})`
-  && {
-    margin-left: ${({ theme }) => theme.spacing(2)}px;
-  }
 `
 
 export default ChoosePizzaFlavours
