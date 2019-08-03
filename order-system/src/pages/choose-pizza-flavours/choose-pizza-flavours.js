@@ -85,7 +85,8 @@ const ChoosePizzaFlavours = ({ location }) => {
                 pizzaFlavours: getFlavoursNameAndId(checkboxes)
               }
             },
-            children: 'How many pizzas?'
+            children: 'How many pizzas?',
+            disabled: checkboxesChecked(checkboxes).length === 0
           }
         }}
       />
