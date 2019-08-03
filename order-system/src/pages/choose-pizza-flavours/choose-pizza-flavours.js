@@ -79,7 +79,10 @@ const ChoosePizzaFlavours = ({ location }) => {
           },
 
           {
-            to: CHOOSE_PIZZA_QUANTITY,
+            to: {
+              pathname: CHOOSE_PIZZA_QUANTITY,
+              state: location.state
+            },
             children: 'How many pizzas?',
             color: 'primary'
           }
