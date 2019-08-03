@@ -8,7 +8,7 @@ import {
   H4,
   Footer
 } from 'ui'
-import { HOME, CHOOSE_PIZZA_FLAVOURS } from 'routes'
+import { HOME } from 'routes'
 
 function ChoosePizzaQuantity () {
   return (
@@ -28,17 +28,15 @@ function ChoosePizzaQuantity () {
         </MainContent>
       </Content>
       <Footer
-        buttons={[
-          {
-            to: CHOOSE_PIZZA_FLAVOURS,
+        buttons={{
+          back: {
             children: 'Change flavours'
           },
-          {
+          action: {
             to: HOME,
-            children: 'Checkout',
-            color: 'primary'
+            children: 'Checkout'
           }
-        ]}
+        }}
       />
     </>
   )

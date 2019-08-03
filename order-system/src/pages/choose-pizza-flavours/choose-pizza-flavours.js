@@ -72,13 +72,12 @@ const ChoosePizzaFlavours = ({ location }) => {
         </PizzasGrid>
       </Content>
       <Footer
-        buttons={[
-          {
-            to: HOME,
+        buttons={{
+          back: {
             children: 'Change size'
           },
 
-          {
+          action: {
             to: {
               pathname: CHOOSE_PIZZA_QUANTITY,
               state: {
@@ -86,10 +85,9 @@ const ChoosePizzaFlavours = ({ location }) => {
                 pizzaFlavours: getFlavoursNameAndId(checkboxes)
               }
             },
-            children: 'How many pizzas?',
-            color: 'primary'
+            children: 'How many pizzas?'
           }
-        ]}
+        }}
       />
     </>
   )
