@@ -1,6 +1,6 @@
 export default [
   {
-    id: 0,
+    id: '0',
     image: '/fake-data/images/calabrese-pizza.png',
     name: 'Calabrese',
     value: {
@@ -10,7 +10,7 @@ export default [
     }
   },
   {
-    id: 1,
+    id: '1',
     image: '/fake-data/images/catupiry-chicken-pizza.png',
     name: 'Chicken with Catupiry',
     value: {
@@ -20,7 +20,7 @@ export default [
     }
   },
   {
-    id: 2,
+    id: '2',
     image: '/fake-data/images/prestige-pizza.jpg',
     name: 'Prestige',
     value: {
