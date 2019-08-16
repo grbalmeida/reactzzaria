@@ -2,10 +2,9 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Redirect } from 'react-router-dom'
-import { Input as MaterialInput } from '@material-ui/core'
+import { Button, Input as MaterialInput } from '@material-ui/core'
 
 import {
-  Button,
   Content,
   HeaderContent,
   H4,
