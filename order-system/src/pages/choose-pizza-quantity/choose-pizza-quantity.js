@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Redirect } from 'react-router-dom'
@@ -10,11 +10,21 @@ import {
   H4,
   Footer
 } from 'ui'
-import { HOME } from 'routes'
+import { HOME, CHECKOUT } from 'routes'
 
 function ChoosePizzaQuantity ({ location }) {
+  const [quantity, setQuantity] = useState(1)
+
   if (!location.state) {
     return <Redirect to={HOME} />
+  }
+
+  function handleChange (e) {
+    const { value } = e.target
+
+    if (value >= 1) {
+      setQuantity(value)
+    }
   }
 
   return (
@@ -28,7 +38,8 @@ function ChoosePizzaQuantity ({ location }) {
         </HeaderContent>
         <MainContent>
           <Input
-            defaultValue='1'
+            value={quantity}
+            onChange={handleChange}
             autoFocus
           />
         </MainContent>
@@ -39,7 +50,7 @@ function ChoosePizzaQuantity ({ location }) {
             children: 'Change flavours'
           },
           action: {
-            to: HOME,
+            to: CHECKOUT,
             children: 'Checkout'
           }
         }}
