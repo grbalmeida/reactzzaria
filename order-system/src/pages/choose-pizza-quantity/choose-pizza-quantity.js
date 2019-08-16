@@ -5,6 +5,7 @@ import { Redirect } from 'react-router-dom'
 import { Input as MaterialInput } from '@material-ui/core'
 
 import {
+  Button,
   Content,
   HeaderContent,
   H4,
@@ -42,6 +43,13 @@ function ChoosePizzaQuantity ({ location }) {
             onChange={handleChange}
             autoFocus
           />
+          <Button
+            variant='contained'
+            color='secondary'
+          >
+            Add and<br />
+            assemble another pizza
+          </Button>
         </MainContent>
       </Content>
       <Footer
@@ -66,6 +74,10 @@ ChoosePizzaQuantity.propTypes = {
 const Input = styled(MaterialInput).attrs({
   type: 'number'
 })`
+  && {
+    margin-bottom: ${({ theme }) => theme.spacing(3)}px;  
+  }
+
   & input {
     font-size: 80px;
     padding: 10px;
@@ -75,8 +87,9 @@ const Input = styled(MaterialInput).attrs({
 `
 
 const MainContent = styled.div`
+  align-items: center;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   margin-top: ${({ theme }) => theme.spacing(2)}px;
 `
 
