@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { Redirect } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import { Button, Input as MaterialInput } from '@material-ui/core'
 
 import {
@@ -11,9 +11,11 @@ import {
   Footer
 } from 'ui'
 import { HOME, CHECKOUT } from 'routes'
+import { useOrder } from 'hooks'
 
 function ChoosePizzaQuantity ({ location }) {
   const [quantity, setQuantity] = useState(1)
+  const { addPizzaToOrder } = useOrder()
 
   if (!location.state) {
     return <Redirect to={HOME} />
@@ -25,6 +27,14 @@ function ChoosePizzaQuantity ({ location }) {
     if (value >= 1) {
       setQuantity(value)
     }
+  }
+
+  function addPizza () {
+    addPizzaToOrder({
+      size: location.state.pizzaSize.id,
+      flavours: location.state.pizzaFlavours.map(flavour => flavour.id),
+      quantity: ''
+    })
   }
 
   return (
@@ -42,13 +52,10 @@ function ChoosePizzaQuantity ({ location }) {
             onChange={handleChange}
             autoFocus
           />
-          <Button
-            variant='contained'
-            color='secondary'
-          >
+          <ButtonAddPizza onClick={addPizza}>
             Add and<br />
             assemble another pizza
-          </Button>
+          </ButtonAddPizza>
         </MainContent>
       </Content>
       <Footer
@@ -69,6 +76,16 @@ function ChoosePizzaQuantity ({ location }) {
 ChoosePizzaQuantity.propTypes = {
   location: PropTypes.object.isRequired
 }
+
+const ButtonAddPizza = styled(Button).attrs({
+  color: 'secondary',
+  component: Link,
+  variant: 'contained'
+})`
+  && {
+    text-align: center;
+  }
+`
 
 const Input = styled(MaterialInput).attrs({
   type: 'number'
