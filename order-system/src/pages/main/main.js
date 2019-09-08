@@ -8,9 +8,18 @@ import {
 import Header from './header'
 import * as routes from 'routes'
 
-const ChoosePizzaSize = React.lazy(() => import('pages/choose-pizza-size'))
-const ChoosePizzaFlavours = React.lazy(() => import('pages/choose-pizza-flavours'))
-const ChoosePizzaQuantity = React.lazy(() => import('pages/choose-pizza-quantity'))
+const ChoosePizzaSize = React.lazy(
+  () => import('pages/choose-pizza-size')
+)
+const ChoosePizzaFlavours = React.lazy(
+  () => import('pages/choose-pizza-flavours')
+)
+const ChoosePizzaQuantity = React.lazy(
+  () => import('pages/choose-pizza-quantity')
+)
+const Checkout = React.lazy(
+  () => import('pages/checkout')
+)
 
 const Main = () => (
   <>
@@ -29,6 +38,10 @@ const Main = () => (
         <Route
           path={routes.CHOOSE_PIZZA_QUANTITY}
           component={ChoosePizzaQuantity}
+        />
+        <Route
+          path={routes.CHECKOUT}
+          component={Checkout}
         />
       </Switch>
     </Suspense>
