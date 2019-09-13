@@ -31,9 +31,8 @@ function ChoosePizzaQuantity ({ location }) {
 
   function addPizza () {
     addPizzaToOrder({
-      size: location.state.pizzaSize.id,
-      flavours: location.state.pizzaFlavours.map(flavour => flavour.id),
-      quantity: ''
+      ...location.state,
+      quantity
     })
   }
 
@@ -68,6 +67,7 @@ function ChoosePizzaQuantity ({ location }) {
           },
           action: {
             to: CHECKOUT,
+            onClick: addPizza,
             children: 'Checkout'
           }
         }}

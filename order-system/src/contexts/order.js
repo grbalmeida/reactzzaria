@@ -7,7 +7,7 @@ function OrderProvider ({ children }) {
   const [pizzas, addPizza] = useState([])
 
   function addPizzaToOrder (pizza) {
-    addPizza(pizzas => pizzas.concat(pizza))
+    addPizza((pizzas) => pizzas.concat(pizza))
   }
 
   return (
