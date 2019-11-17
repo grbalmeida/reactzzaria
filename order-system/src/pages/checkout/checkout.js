@@ -10,7 +10,7 @@ import {
   Typography
 } from '@material-ui/core'
 
-import { Content, Title as UiTitle } from 'ui'
+import { Content, Footer, Title as UiTitle } from 'ui'
 import { useOrder } from 'hooks'
 import { singularOrPlural } from 'utils'
 
@@ -19,57 +19,63 @@ function Checkout () {
   console.log(order)
 
   return (
-    <Content>
-      <Grid container spacing={4}>
-        <Grid item xs={12} md={6}>
-          <Title>What is the shipping address?</Title>
-          <PaperContainer>
-            <Grid container spacing={2}>
-              <TextField label='Zip code' xs={4} autoFocus />
-              <Grid item xs={8} />
-              <TextField label='Street' xs={9} />
-              <TextField label='Number' xs={3} />
-              <TextField label='Complement' xs={12} />
-              <TextField label='City' xs={9} />
-              <TextField label='State' xs={3} />
-            </Grid>
-          </PaperContainer>
+    <>
+      <Content>
+        <Grid container spacing={4}>
+          <Grid item xs={12} md={6}>
+            <Title>What is the shipping address?</Title>
+            <PaperContainer>
+              <Grid container spacing={2}>
+                <TextField label='Zip code' xs={4} autoFocus />
+                <Grid item xs={8} />
+                <TextField label='Street' xs={9} />
+                <TextField label='Number' xs={3} />
+                <TextField label='Complement' xs={12} />
+                <TextField label='City' xs={9} />
+                <TextField label='State' xs={3} />
+              </Grid>
+            </PaperContainer>
 
-          <Title>What's your phone number?</Title>
-          <PaperContainer>
-            <TextField label='Phone number' xs={4} />
-          </PaperContainer>
+            <Title>What's your phone number?</Title>
+            <PaperContainer>
+              <TextField label='Phone number' xs={4} />
+            </PaperContainer>
+          </Grid>
+          <Grid container item xs={12} md={6} direction='column'>
+            <Title>Order information</Title>
+            <PaperContainer>
+              <List>
+                {order.pizzas.map((pizza, index) => {
+                  const { pizzaFlavours, pizzaSize, quantity } = pizza
+                  const { name, slices, flavours } = pizzaSize
+
+                  return (
+                    <ListItem key={index}>
+                      <Typography>
+                        {quantity} {' '}
+                        <b>{name.toUpperCase()}</b> {'- '}
+                        {singularOrPlural(quantity, 'pizza', 'pizzas')} {' '}
+                        ({slices} {singularOrPlural(slices, 'slice', 'slices')}, {' '}
+                        {flavours} {singularOrPlural(flavours, 'flavour', 'flavours')})
+
+                        <br />
+
+                        {singularOrPlural(pizzaFlavours.length, 'in flavour', 'in the flavours')}{' '}
+                        <b>{pizzaFlavours.map(({ name }) => name).join(', ')}</b>
+                      </Typography>
+                    </ListItem>
+                  )
+                })}
+              </List>
+            </PaperContainer>
+          </Grid>
         </Grid>
-        <Grid container item xs={12} md={6} direction='column'>
-          <Title>Order information</Title>
-          <PaperContainer>
-            <List>
-              {order.pizzas.map((pizza, index) => {
-                const { pizzaFlavours, pizzaSize, quantity } = pizza
-                const { name, slices, flavours } = pizzaSize
+      </Content>
 
-                return (
-                  <ListItem key={index}>
-                    <Typography>
-                      {quantity} {' '}
-                      <b>{name.toUpperCase()}</b> {'- '}
-                      {singularOrPlural(quantity, 'pizza', 'pizzas')} {' '}
-                      ({slices} {singularOrPlural(slices, 'slice', 'slices')}, {' '}
-                      {flavours} {singularOrPlural(flavours, 'flavour', 'flavours')})
-
-                      <br />
-
-                      {singularOrPlural(pizzaFlavours.length, 'in flavour', 'in the flavours')}{' '}
-                      <b>{pizzaFlavours.map(({ name }) => name).join(', ')}</b>
-                    </Typography>
-                  </ListItem>
-                )
-              })}
-            </List>
-          </PaperContainer>
-        </Grid>
-      </Grid>
-    </Content>
+      <Footer>
+        Checkout Footer
+      </Footer>
+    </>
   )
 }
 
