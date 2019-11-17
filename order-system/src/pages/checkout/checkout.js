@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 import {
   Button,
   List,
@@ -14,6 +15,7 @@ import {
 import { Content, Footer, Title as UiTitle } from 'ui'
 import { useOrder } from 'hooks'
 import { singularOrPlural } from 'utils'
+import { CHECKOUT_CONFIRMATION } from 'routes'
 
 function Checkout () {
   const { order } = useOrder()
@@ -75,7 +77,12 @@ function Checkout () {
 
       <Footer>
         <FooterContent>
-          <Button variant='contained' color='primary'>
+          <Button
+            variant='contained'
+            color='primary'
+            component={Link}
+            to={CHECKOUT_CONFIRMATION}
+          >
             Confirm data
           </Button>
         </FooterContent>
