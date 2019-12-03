@@ -1,7 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Container, Paper, Typography } from '@material-ui/core'
-import { Content, H4, OrderInfo } from 'ui'
+import {
+  Container,
+  Divider as MaterialDivider,
+  Paper,
+  Typography
+} from '@material-ui/core'
+import { Content, H4, H6, OrderInfo } from 'ui'
 import { useAuth } from 'hooks'
 
 function CheckoutConfirmation () {
@@ -17,8 +22,22 @@ function CheckoutConfirmation () {
       </Header>
       <Container maxWidth='small'>
         <PaperContainer>
-          <Typography variant='h6'>Your order:</Typography>
+          <H6>Your order:</H6>
           <OrderInfo />
+
+          <Divider />
+
+          <H6>Order delivery address:</H6>
+          <Typography>
+            Street, Complement, Zip code, City, State
+          </Typography>
+
+          <Divider />
+
+          <H6>Contact phone:</H6>
+          <Typography>
+            (44) 98888-7777
+          </Typography>
         </PaperContainer>
       </Container>
     </Content>
@@ -36,6 +55,12 @@ const Header = styled.div`
 const PaperContainer = styled(Paper)`
   && {
     padding: ${({ theme }) => theme.spacing(3)}px;
+  }
+`
+
+const Divider = styled(MaterialDivider)`
+  && {
+    margin: ${({ theme }) => theme.spacing(3, 0)}
   }
 `
 
