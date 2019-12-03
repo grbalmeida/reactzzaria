@@ -4,23 +4,15 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import {
   Button,
-  List,
-  ListItem,
   Grid,
   Paper,
-  TextField as MaterialTextField,
-  Typography
+  TextField as MaterialTextField
 } from '@material-ui/core'
 
-import { Content, Footer, Title as UiTitle } from 'ui'
-import { useOrder } from 'hooks'
-import { singularOrPlural } from 'utils'
+import { Content, Footer, OrderInfo, Title as UiTitle } from 'ui'
 import { CHECKOUT_CONFIRMATION } from 'routes'
 
 function Checkout () {
-  const { order } = useOrder()
-  console.log(order)
-
   return (
     <>
       <Content>
@@ -47,29 +39,7 @@ function Checkout () {
           <Grid container item xs={12} md={6} direction='column'>
             <Title>Order information</Title>
             <PaperContainer>
-              <List>
-                {order.pizzas.map((pizza, index) => {
-                  const { pizzaFlavours, pizzaSize, quantity } = pizza
-                  const { name, slices, flavours } = pizzaSize
-
-                  return (
-                    <ListItem key={index}>
-                      <Typography>
-                        <b>{quantity} {' '}</b>
-                        <b>{name.toUpperCase()}</b> {'- '}
-                        {singularOrPlural(quantity, 'pizza', 'pizzas')} {' '}
-                        ({slices} {singularOrPlural(slices, 'slice', 'slices')}, {' '}
-                        {flavours} {singularOrPlural(flavours, 'flavour', 'flavours')})
-
-                        <br />
-
-                        {singularOrPlural(pizzaFlavours.length, 'in flavour', 'in the flavours')}{' '}
-                        <b>{pizzaFlavours.map(({ name }) => name).join(', ')}</b>
-                      </Typography>
-                    </ListItem>
-                  )
-                })}
-              </List>
+              <OrderInfo />
             </PaperContainer>
           </Grid>
         </Grid>
