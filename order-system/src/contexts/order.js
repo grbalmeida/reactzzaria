@@ -1,5 +1,6 @@
 import React, { createContext, useState } from 'react'
 import PropTypes from 'prop-types'
+import uuidv4 from 'uuid/v4'
 
 const OrderContext = createContext()
 
@@ -9,15 +10,26 @@ function OrderProvider ({ children }) {
 
   function addPizzaToOrder (pizza) {
     if (orderInProgress) {
-      return addPizza((pizzas) => pizzas.concat(pizza))
+      return addPizza((pizzas) => pizzas.concat(newPizza(pizza)))
     }
 
     setOrderInProgress(true)
-    addPizza([pizza])
+    addPizza([newPizza(pizza)])
   }
 
   function sendOrder () {
     setOrderInProgress(false)
+  }
+
+  function newPizza (pizza) {
+    return {
+      id: uuidv4(),
+      ...pizza
+    }
+  }
+
+  function removePizzaFromOrder (id) {
+    addPizza((pizzas) => pizzas.filter(pizza => pizza.id !== id))
   }
 
   return (
@@ -26,7 +38,8 @@ function OrderProvider ({ children }) {
         pizzas
       },
       addPizzaToOrder,
-      sendOrder
+      sendOrder,
+      removePizzaFromOrder
     }}>
       {children}
     </OrderContext.Provider>
