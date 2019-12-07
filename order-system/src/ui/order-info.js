@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import {
   IconButton,
@@ -10,7 +11,7 @@ import { Close } from '@material-ui/icons'
 import { useOrder } from 'hooks'
 import { singularOrPlural } from 'utils'
 
-function OrderInfo () {
+function OrderInfo ({ showOptions }) {
   const { order } = useOrder()
 
   return (
@@ -33,14 +34,21 @@ function OrderInfo () {
               {singularOrPlural(pizzaFlavours.length, 'in flavour', 'in the flavours')}{' '}
               <b>{pizzaFlavours.map(({ name }) => name).join(', ')}</b>
             </Typography>
-            <IconButton title='Remove' color='secondary'>
-              <Close />
-            </IconButton>
+            {
+              showOptions &&
+              <IconButton title='Remove' color='secondary'>
+                <Close />
+              </IconButton>
+            }
           </ListItem>
         )
       })}
     </List>
   )
+}
+
+OrderInfo.propTypes = {
+  showOptions: PropTypes.bool
 }
 
 const ListItem = styled(MaterialListItem)`
