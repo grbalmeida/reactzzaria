@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import styled from 'styled-components'
 import {
   Button,
@@ -9,11 +9,18 @@ import {
   TextField as MaterialTextField
 } from '@material-ui/core'
 
-import { CHECKOUT_CONFIRMATION } from 'routes'
+import { CHECKOUT_CONFIRMATION, HOME } from 'routes'
 import { Content, OrderInfo, Title as UiTitle } from 'ui'
 import FooterCheckout from 'pages/checkout/footer-checkout'
+import { useOrder } from 'hooks'
 
 function Checkout () {
+  const { order } = useOrder()
+
+  if (!order.pizzas.length) {
+    return <Redirect to={HOME} />
+  }
+
   return (
     <>
       <Content>
@@ -53,7 +60,7 @@ function Checkout () {
           component={Link}
           to={CHECKOUT_CONFIRMATION}
         >
-          Confirm data
+          Confirm order
         </Button>
       </FooterCheckout>
     </>
