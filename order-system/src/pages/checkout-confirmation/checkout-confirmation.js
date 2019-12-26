@@ -15,7 +15,7 @@ import { CHECKOUT_SUCCESS } from 'routes'
 
 function CheckoutConfirmation () {
   const { userInfo } = useAuth()
-  const { sendOrder } = useOrder()
+  const { order, sendOrder } = useOrder()
 
   return (
     <>
@@ -35,14 +35,19 @@ function CheckoutConfirmation () {
 
             <H6>Order delivery address:</H6>
             <Typography>
-            Street, Complement, Zip code, City, State
+              {order.address.address},
+              {' n'} {order.address.number},
+              {' '} {order.address.complement}<br />
+              District: {order.address.district}<br />
+              Zip code: {order.address.code}<br />
+              {order.address.city}/{order.address.state}
             </Typography>
 
             <Divider />
 
             <H6>Contact phone:</H6>
             <Typography>
-            (44) 98888-7777
+              {order.phone}
             </Typography>
           </PaperContainer>
         </Container>

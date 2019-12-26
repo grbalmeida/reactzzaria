@@ -10,11 +10,12 @@ import {
 } from '@material-ui/core'
 import { Content, H4, H6, OrderInfo } from 'ui'
 import FooterCheckout from 'pages/checkout/footer-checkout'
-import { useAuth } from 'hooks'
+import { useAuth, useOrder } from 'hooks'
 import { HOME } from 'routes'
 
 function CheckoutSuccess () {
   const { userInfo } = useAuth()
+  const { order } = useOrder()
 
   return (
     <>
@@ -37,14 +38,19 @@ function CheckoutSuccess () {
 
             <H6>Order delivery address:</H6>
             <Typography>
-            Street, Complement, Zip code, City, State
+              {order.address.address},
+              {' n'} {order.address.number},
+              {' '} {order.address.complement}<br />
+              District: {order.address.district}<br />
+              Zip code: {order.address.code}<br />
+              {order.address.city}/{order.address.state}
             </Typography>
 
             <Divider />
 
             <H6>Contact phone:</H6>
             <Typography>
-            (44) 98888-7777
+              {order.phone}
             </Typography>
           </PaperContainer>
         </Container>
