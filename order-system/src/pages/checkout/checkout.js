@@ -11,7 +11,7 @@ import { CHECKOUT_CONFIRMATION, HOME } from 'routes'
 import { Content, OrderInfo, Title as UiTitle } from 'ui'
 import FooterCheckout from 'pages/checkout/footer-checkout'
 import FormAddress from './form-address'
-import TextField from './text-field'
+import PhoneField from './phone-field'
 import { useOrder } from 'hooks'
 
 function Checkout () {
@@ -33,7 +33,7 @@ function Checkout () {
 
             <Title>What's your phone number?</Title>
             <PaperContainer>
-              <TextField label='Phone number' xs={4} />
+              <PhoneField />
             </PaperContainer>
           </Grid>
           <Grid container item xs={12} md={6} direction='column'>
