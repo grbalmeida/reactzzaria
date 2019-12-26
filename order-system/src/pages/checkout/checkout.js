@@ -15,7 +15,7 @@ import PhoneField from './phone-field'
 import { useOrder } from 'hooks'
 
 function Checkout () {
-  const { order } = useOrder()
+  const { order, addAddress, addPhone } = useOrder()
 
   if (!order.pizzas.length) {
     return <Redirect to={HOME} />
@@ -28,12 +28,12 @@ function Checkout () {
           <Grid item xs={12} md={6}>
             <Title>What is the shipping address?</Title>
             <PaperContainer>
-              <FormAddress />
+              <FormAddress onUpdate={addAddress} />
             </PaperContainer>
 
             <Title>What's your phone number?</Title>
             <PaperContainer>
-              <PhoneField />
+              <PhoneField onUpdate={addPhone} />
             </PaperContainer>
           </Grid>
           <Grid container item xs={12} md={6} direction='column'>
