@@ -12,6 +12,7 @@ function FormAddress () {
   const [addressState, dispatch] = useReducer(reducer, initialState)
   const [fetchingCep, setFetchingCep] = useState(false)
   const numberField = useRef()
+  const addressField = useRef()
 
   useEffect(() => {
     async function fetchAddress () {
@@ -22,9 +23,27 @@ function FormAddress () {
       setFetchingCep(true)
 
       const data = await fetch(`https://apps.widenet.com.br/busca-cep/api/cep/${cep}.json`)
-      const result = await data.json()
 
       setFetchingCep(false)
+
+      if (!data.ok) {
+        dispatch({ type: 'RESET' })
+        addressField.current.focus()
+        return
+      }
+
+      const result = await data.json()
+
+      if (!result.ok) {
+        dispatch({
+          type: 'FAIL',
+          payload: {
+            error: result.message
+          }
+        })
+
+        return
+      }
 
       dispatch({
         type: 'UPDATE_FULL_ADDRESS',
@@ -66,6 +85,7 @@ function FormAddress () {
         value={cep}
         onChange={handleChangeCep}
         disabled={fetchingCep}
+        error={addressState.error}
       />
       <Grid item xs={8}>
         {fetchingCep && <CircularProgress size={20} />}
@@ -75,7 +95,8 @@ function FormAddress () {
         {
           label: 'Street',
           xs: 9,
-          name: 'address'
+          name: 'address',
+          inputRef: addressField
         },
 
         {
@@ -119,7 +140,8 @@ function reducer (state, action) {
   if (action.type === 'UPDATE_FULL_ADDRESS') {
     return {
       ...state,
-      ...action.payload
+      ...action.payload,
+      error: null
     }
   }
 
@@ -128,6 +150,17 @@ function reducer (state, action) {
       ...state,
       [action.payload.name]: action.payload.value
     }
+  }
+
+  if (action.type === 'FAIL') {
+    return {
+      ...initialState,
+      error: action.payload.error
+    }
+  }
+
+  if (action.type === 'RESET') {
+    return initialState
   }
 
   return state
